@@ -2,7 +2,8 @@
 
 **Theme:** Student Finance Tracker (Theme 1) — budgets, transactions, search.
 
-**Live demo:** <!-- Add your GitHub Pages URL here after deployment -->
+**Live demo:** https://blewis-bump.github.io/alu-front-end/#dashboard
+**demo video:** https://youtu.be/TgmX2cXt5c8
 
 ## How to Run
 
