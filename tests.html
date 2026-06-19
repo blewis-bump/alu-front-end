@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regex Tests — FINLAC</title>
+    <link rel="stylesheet" href="styles/test.css">
+</head>
+<body>
+    <p class="page-eyebrow">Quality Assurance</p>
+    <h1>Regex Tests</h1>
+    <div class="page-rule"></div>
+    <p>All patterns from <code>scripts/transactions.js</code> and <code>scripts/settings.js</code>. Open this file directly in the browser — no server needed.</p>
+
+    <div id="summary"></div>
+    <div id="results"></div>
+
+    <script>
+        const tests = [];
+
+        function assert(rule, pattern, input, shouldMatch, note = '') {
+            const result = pattern.test(input);
+            const pass   = result === shouldMatch;
+            tests.push({ rule, patternStr: pattern.toString(), input, shouldMatch, result, pass, note });
+        }
+
+        //  Rule 1: Description — no leading/trailing whitespace .
+        const DESC_RE = /^\S(?:.*\S)?$/;
+
+        assert('Rule 1 - Description', DESC_RE, 'Lunch at cafeteria',  true,  'normal description');
+        assert('Rule 1 - Description', DESC_RE, 'A',                   true,  'single character');
+        assert('Rule 1 - Description', DESC_RE, 'Bus pass top-up',     true,  'hyphens ok');
+        assert('Rule 1 - Description', DESC_RE, ' Lunch',              false, 'leading space');
+        assert('Rule 1 - Description', DESC_RE, 'Lunch ',              false, 'trailing space');
+        assert('Rule 1 - Description', DESC_RE, '  ',                  false, 'only spaces');
+        assert('Rule 1 - Description', DESC_RE, '',                    false, 'empty string');
+
+        //  Rule 2: Amount — valid monetary value .
+        const AMOUNT_RE = /^(0|[1-9]\d*)(\.\d{1,2})?$/;
+
+        assert('Rule 2 - Amount', AMOUNT_RE, '12.50',   true,  'standard amount');
+        assert('Rule 2 - Amount', AMOUNT_RE, '0',       true,  'zero is valid');
+        assert('Rule 2 - Amount', AMOUNT_RE, '100',     true,  'whole number');
+        assert('Rule 2 - Amount', AMOUNT_RE, '1200.00', true,  'large amount');
+        assert('Rule 2 - Amount', AMOUNT_RE, '9.9',     true,  'one decimal place');
+        assert('Rule 2 - Amount', AMOUNT_RE, '01.50',   false, 'leading zero rejected');
+        assert('Rule 2 - Amount', AMOUNT_RE, '1.999',   false, 'three decimal places rejected');
+        assert('Rule 2 - Amount', AMOUNT_RE, '-5',      false, 'negative rejected');
+        assert('Rule 2 - Amount', AMOUNT_RE, '1.',      false, 'trailing dot rejected');
+        assert('Rule 2 - Amount', AMOUNT_RE, 'abc',     false, 'non-numeric rejected');
+        assert('Rule 2 - Amount', AMOUNT_RE, '',        false, 'empty string rejected');
+
+        //  Rule 3: Date — strict YYYY-MM-DD .
+        const DATE_RE = /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
+
+        assert('Rule 3 - Date', DATE_RE, '2026-06-18', true,  'valid date');
+        assert('Rule 3 - Date', DATE_RE, '2025-01-01', true,  'new year');
+        assert('Rule 3 - Date', DATE_RE, '2026-12-31', true,  'last day of year');
+        assert('Rule 3 - Date', DATE_RE, '2026-13-01', false, 'month 13 rejected');
+        assert('Rule 3 - Date', DATE_RE, '2026-00-01', false, 'month 00 rejected');
+        assert('Rule 3 - Date', DATE_RE, '2026-06-00', false, 'day 00 rejected');
+        assert('Rule 3 - Date', DATE_RE, '2026-06-32', false, 'day 32 rejected');
+        assert('Rule 3 - Date', DATE_RE, '26-06-18',   false, 'short year rejected');
+        assert('Rule 3 - Date', DATE_RE, '2026/06/18', false, 'slash separator rejected');
+        assert('Rule 3 - Date', DATE_RE, '',            false, 'empty string rejected');
+
+        //  Rule 4: Category — letters, spaces, hyphens .
+        const CATEGORY_RE = /^[A-Za-z]+(?:[ -][A-Za-z]+)*$/;
+
+        assert('Rule 4 - Category', CATEGORY_RE, 'Food',       true,  'single word');
+        assert('Rule 4 - Category', CATEGORY_RE, 'Non-Food',   true,  'hyphen allowed');
+        assert('Rule 4 - Category', CATEGORY_RE, 'Books',      true,  'default category');
+        assert('Rule 4 - Category', CATEGORY_RE, 'Food123',    false, 'numbers rejected');
+        assert('Rule 4 - Category', CATEGORY_RE, 'Food@Home',  false, 'symbol rejected');
+        assert('Rule 4 - Category', CATEGORY_RE, '-Food',      false, 'leading hyphen rejected');
+        assert('Rule 4 - Category', CATEGORY_RE, 'Food-',      false, 'trailing hyphen rejected');
+        assert('Rule 4 - Category', CATEGORY_RE, '',           false, 'empty string rejected');
+
+        //  Advanced: back-reference — duplicate adjacent words 
+        const DUP_WORD_RE = /\b(\w+)\s+\1\b/i;
+
+        assert('Advanced - Duplicate word', DUP_WORD_RE, 'the the coffee',      true,  'duplicate "the" detected');
+        assert('Advanced - Duplicate word', DUP_WORD_RE, 'coffee coffee shop',  true,  'duplicate "coffee" detected');
+        assert('Advanced - Duplicate word', DUP_WORD_RE, 'THE the coffee',      true,  'case-insensitive match');
+        assert('Advanced - Duplicate word', DUP_WORD_RE, 'coffee shop',         false, 'no duplicate — ok');
+        assert('Advanced - Duplicate word', DUP_WORD_RE, 'Lunch at cafeteria',  false, 'normal description — ok');
+        assert('Advanced - Duplicate word', DUP_WORD_RE, 'Books books',         true,  'duplicate in mixed case detected');
+
+        //  Safe regex compiler — try/catch wraps user search input 
+        function compileRegex(input, caseInsensitive = true) {
+            try {
+                return input ? new RegExp(input, caseInsensitive ? 'i' : '') : null;
+            } catch {
+                return null;
+            }
+        }
+
+        const safeTests = [
+            { input: 'food',   expected: true,  note: 'simple pattern compiles' },
+            { input: '(a|b)',  expected: true,  note: 'alternation compiles' },
+            { input: '\\d+',  expected: true,  note: 'escape sequence compiles' },
+            { input: '[[[',    expected: false, note: 'invalid regex returns null' },
+            { input: '(?P<x>)',expected: false, note: 'unsupported group returns null' },
+            { input: '',       expected: false, note: 'empty string returns null' },
+        ];
+
+        safeTests.forEach(({ input, expected, note }) => {
+            const result = compileRegex(input) !== null;
+            tests.push({
+                rule: 'Safe regex compiler',
+                patternStr: `compileRegex("${input}")`,
+                input,
+                shouldMatch: expected,
+                result,
+                pass: result === expected,
+                note,
+            });
+        });
+
+        //  Render .
+        const passed = tests.filter(t => t.pass).length;
+        const failed = tests.length - passed;
+
+        const summary = document.getElementById('summary');
+        summary.className = `summary ${failed === 0 ? 'all-pass' : 'has-fail'}`;
+        summary.textContent = `${passed} / ${tests.length} passed${failed > 0 ? ` — ${failed} FAILED` : ''}`;
+
+        const groups = {};
+        tests.forEach(t => {
+            if (!groups[t.rule]) groups[t.rule] = [];
+            groups[t.rule].push(t);
+        });
+
+        const container = document.getElementById('results');
+        Object.entries(groups).forEach(([rule, group]) => {
+            const h2 = document.createElement('h2');
+            h2.textContent = rule;
+            container.appendChild(h2);
+
+            const table = document.createElement('table');
+            table.innerHTML = '<tr><th>Result</th><th>Input</th><th>Expected</th><th>Note</th></tr>';
+            group.forEach(t => {
+                const tr = document.createElement('tr');
+                tr.className = t.pass ? 'pass' : 'fail';
+                tr.innerHTML = `
+                    <td>${t.pass ? 'ok' : '✗'}</td>
+                    <td><code>${t.input === '' ? '(empty)' : t.input}</code></td>
+                    <td>${t.shouldMatch ? 'match' : 'no match'}</td>
+                    <td>${t.note}</td>
+                `;
+                table.appendChild(tr);
+            });
+            container.appendChild(table);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,137 @@
+[
+  {
+    "id": "txn_0001",
+    "description": "Monthly campus parking permit",
+    "amount": 45.00,
+    "category": "Transport",
+    "date": "2026-06-01",
+    "createdAt": "2026-06-01T08:30:00.000Z",
+    "updatedAt": "2026-06-01T08:30:00.000Z"
+  },
+  {
+    "id": "txn_0002",
+    "description": "Textbook for Advanced Algorithms",
+    "amount": 134.99,
+    "category": "Books",
+    "date": "2026-06-02",
+    "createdAt": "2026-06-02T14:15:22.000Z",
+    "updatedAt": "2026-06-02T14:15:22.000Z"
+  },
+  {
+    "id": "txn_0003",
+    "description": "Lunch at student cafeteria",
+    "amount": 12.50,
+    "category": "Food",
+    "date": "2026-06-03",
+    "createdAt": "2026-06-03T12:05:10.000Z",
+    "updatedAt": "2026-06-03T12:05:10.000Z"
+  },
+  {
+    "id": "txn_0004",
+    "description": "Late library return fee",
+    "amount": 2.50,
+    "category": "Fees",
+    "date": "2026-06-04",
+    "createdAt": "2026-06-04T09:11:45.000Z",
+    "updatedAt": "2026-06-04T09:11:45.000Z"
+  },
+  {
+    "id": "txn_0005",
+    "description": "Movie night ticket and snacks",
+    "amount": 22.75,
+    "category": "Entertainment",
+    "date": "2026-06-05",
+    "createdAt": "2026-06-05T21:40:00.000Z",
+    "updatedAt": "2026-06-05T21:40:00.000Z"
+  },
+  {
+    "id": "txn_0006",
+    "description": "Iced coffee energy drink coffee",
+    "amount": 6.80,
+    "category": "Food",
+    "date": "2026-06-06",
+    "createdAt": "2026-06-06T10:15:00.000Z",
+    "updatedAt": "2026-06-06T10:15:00.000Z"
+  },
+  {
+    "id": "txn_0007",
+    "description": "Lab safety goggles and coat",
+    "amount": 35.00,
+    "category": "Books",
+    "date": "2026-06-08",
+    "createdAt": "2026-06-08T11:24:13.000Z",
+    "updatedAt": "2026-06-08T11:24:13.000Z"
+  },
+  {
+    "id": "txn_0008",
+    "description": "Semester student union dues",
+    "amount": 150.00,
+    "category": "Fees",
+    "date": "2026-06-10",
+    "createdAt": "2026-06-10T16:50:00.000Z",
+    "updatedAt": "2026-06-10T16:50:00.000Z"
+  },
+  {
+    "id": "txn_0009",
+    "description": "Bus pass top-up",
+    "amount": 15.00,
+    "category": "Transport",
+    "date": "2026-06-11",
+    "createdAt": "2026-06-11T07:45:30.000Z",
+    "updatedAt": "2026-06-11T07:45:30.000Z"
+  },
+  {
+    "id": "txn_0010",
+    "description": "Concert ticket early-bird",
+    "amount": 85.50,
+    "category": "Entertainment",
+    "date": "2026-06-12",
+    "createdAt": "2026-06-12T19:02:11.000Z",
+    "updatedAt": "2026-06-12T19:02:11.000Z"
+  },
+  {
+    "id": "txn_0011",
+    "description": "Used desk lamp for dorm",
+    "amount": 10.00,
+    "category": "Other",
+    "date": "2026-06-13",
+    "createdAt": "2026-06-13T15:30:45.000Z",
+    "updatedAt": "2026-06-13T15:30:45.000Z"
+  },
+  {
+    "id": "txn_0012",
+    "description": "Subway sandwich combo deal",
+    "amount": 11.25,
+    "category": "Food",
+    "date": "2026-06-14",
+    "createdAt": "2026-06-14T13:10:00.000Z",
+    "updatedAt": "2026-06-14T13:10:00.000Z"
+  },
+  {
+    "id": "txn_0013",
+    "description": "Notebooks pens and highlighters",
+    "amount": 18.45,
+    "category": "Books",
+    "date": "2026-06-15",
+    "createdAt": "2026-06-15T09:05:22.000Z",
+    "updatedAt": "2026-06-15T09:05:22.000Z"
+  },
+  {
+    "id": "txn_0014",
+    "description": "Emergency laundry tokens purchase",
+    "amount": 8.00,
+    "category": "Other",
+    "date": "2026-06-16",
+    "createdAt": "2026-06-16T18:22:19.000Z",
+    "updatedAt": "2026-06-16T18:22:19.000Z"
+  },
+  {
+    "id": "txn_0015",
+    "description": "Tuition down-payment installment",
+    "amount": 1200.00,
+    "category": "Fees",
+    "date": "2026-06-17",
+    "createdAt": "2026-06-17T16:00:00.000Z",
+    "updatedAt": "2026-06-17T16:00:00.000Z"
+  }
+]

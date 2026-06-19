@@ -1,0 +1,211 @@
+
+
+/* Off-screen hide for skip link, snaps visible when selected by keyboard. */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #d20303;
+  color: #fff;
+  padding: 8px;
+  z-index: 100;
+}
+.skip-link:focus {
+  top: 0;
+}
+
+/* Explicit orange glow configuration guaranteeing visible focus feedback. */
+*:focus {
+  outline: 3px solid orange;
+}
+
+/* Animations & Transitions. */
+
+/* Section fade-in when navigated to */
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.app-section:not(.hidden) {
+  animation: fadeSlideIn 0.25s ease;
+}
+
+/* Button hover lift with colour transition */
+button {
+  transition: background-color 0.15s ease, color 0.15s ease, transform 0.1s ease;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #222;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+/* Navigation & SPA Section Visibility Logic */
+
+/* Direct structural display killer used to control visible single-page view panels */
+.hidden {
+  display: none !important;
+}
+
+/* Base Mobile First Layout Strategy (~360px). */
+
+/* Vertical mobile fallback stacks components sequentially */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  padding: 10px;
+  background-color: rgb(134, 134, 115);
+}
+
+/* Stacked list layout optimization targeting narrow phone screen constraints */
+header nav ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  list-style: none;
+  padding: 0;
+}
+
+main {
+  flex: 1;
+}
+
+/* Converts strict table grids into stacked row-card objects on phone screens [cite: 26, 68] */
+#records-table,
+#records-table thead,
+#records-table tbody,
+#records-table th,
+#records-table td,
+#records-table tr {
+  display: block;
+}
+
+#records-table tr {
+  margin-bottom: 15px;
+}
+
+/* Dashboard Stat Cards. */
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px;
+  background: #f5f5f5;
+  border-radius: 6px;
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #555;
+}
+
+.stat-value {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.budget-over {
+  color: #c0392b;
+}
+.budget-under {
+  color: #27ae60;
+}
+
+/* 7-Day Trend Chart  */
+#trend-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  height: 150px;
+  padding-bottom: 4px;
+  border-bottom: 2px solid #ccc;
+}
+
+.trend-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+}
+
+.trend-bar {
+  width: 70%;
+  background-color: #4a90d9;
+  border-radius: 3px 3px 0 0;
+  transition: height 0.4s ease;
+  min-height: 2px;
+}
+
+.trend-label {
+  font-size: 0.65rem;
+  color: #555;
+  white-space: nowrap;
+}
+
+/*  Tablet Breakpoint (768px) [cite: 68]  */
+@media (min-width: 768px) {
+  /* Transforms stacked navigation lists back into top horizontal bars */
+  header nav ul {
+    flex-direction: row;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* Reconstructs traditional row/cell distributions for larger screens [cite: 26, 68] */
+  #records-table {
+    display: table;
+    width: 100%;
+  }
+  #records-table thead {
+    display: table-header-group;
+  }
+  #records-table tbody {
+    display: table-row-group;
+  }
+  #records-table tr {
+    display: table-row;
+    margin-bottom: 0;
+  }
+  #records-table th,
+  #records-table td {
+    display: table-cell;
+    padding: 8px;
+  }
+}
+
+/* Desktop Breakpoint (1024px) [cite: 68] */
+@media (min-width: 1024px) {
+  /* Centers grid width safely across ultra-wide desktop monitors */
+  body {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}

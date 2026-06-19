@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,600;1,8..60,700&display=swap');
+
+:root {
+  --paper:    #fff7d3;
+  --card:     #fffdf2;
+  --note:     #fbf7e2;
+  --ink:      #2c2620;
+  --ink-2:    #5a5142;
+  --muted:    #7a7060;
+  --red:      #ab1509;
+  --red-deep: #8f150c;
+  --gold:     #b08d57;
+  --line:     #e4d9ad;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Source Serif 4', Georgia, serif;
+  color: var(--ink);
+  background: var(--paper);
+  min-height: 100vh;
+  margin: 0;
+  padding: 40px 40px 72px;
+  max-width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+h1 {
+  font-size: 54px;
+  font-weight: 700;
+  color: var(--red);
+  margin: 0 0 6px;
+  letter-spacing: -0.5px;
+}
+
+.page-eyebrow {
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: var(--gold);
+  font-weight: 600;
+  text-transform: uppercase;
+  margin: 0 0 6px;
+}
+
+.page-rule {
+  height: 1px;
+  background: linear-gradient(90deg, var(--red), rgba(171,21,9,0.15));
+  margin: 18px 0 30px;
+}
+
+h2 {
+  font-style: italic;
+  font-weight: 700;
+  font-size: 21px;
+  color: var(--ink);
+  margin: 32px 0 12px;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+p {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--ink-2);
+  margin-bottom: 22px;
+}
+
+code {
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  background: var(--note);
+  border: 1px solid var(--line);
+  padding: 1px 6px;
+  border-radius: 2px;
+  color: var(--red-deep);
+}
+
+/* Summary badge */
+.summary {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 13px 22px;
+  border-radius: 2px;
+  margin-bottom: 28px;
+  display: inline-block;
+}
+
+.summary.all-pass {
+  background: transparent;
+  border: 1.5px solid var(--red);
+  color: var(--red);
+}
+
+.summary.has-fail {
+  background: transparent;
+  border: 1.5px solid var(--red);
+  color: var(--red);
+}
+
+/* Results table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 28px;
+  font-size: 14px;
+  background: var(--card);
+  border: 1px solid var(--line);
+}
+
+thead tr {
+  border-bottom: 1.5px solid var(--red);
+}
+
+th {
+  font-size: 11px;
+  letter-spacing: 2.5px;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  padding: 10px 14px;
+  text-align: left;
+}
+
+td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+
+tbody tr:hover {
+  background: rgba(171,21,9,0.03);
+}
+tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.pass td:first-child {
+  color: var(--red);
+  font-weight: 700;
+}
+.fail td:first-child {
+  color: var(--red);
+  font-weight: 700;
+}
+
+.pass td:first-child::before {
+  content: "PASS";
+}
+.fail td:first-child::before {
+  content: "FAIL";
+}

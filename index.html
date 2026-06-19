@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+  <title>FINLAC</title>
+  <link rel="icon" type="image/png" href="styles/apple-touch-icon.png">
+  <link rel="apple-touch-icon" href="styles/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,600;1,8..60,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/app.css">
+</head>
+
+<body>
+
+  <!-- Decorative background -->
+  <div class="paper-wash" aria-hidden="true"></div>
+
+  <!-- Accessibility: skip to content -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Shared ARIA live region — used by all three JS modules -->
+  <div id="aria-status" role="status" aria-live="polite" class="sr-only"></div>
+
+  <!-- header -->
+  <header>
+    <nav class="primary-nav" aria-label="Primary navigation">
+      <button data-section="dashboard"    aria-current="page">DASHBOARD</button>
+      <button data-section="records">TRANSACTIONS</button>
+      <button data-section="form-section">ADD ENTRY</button>
+      <button data-section="settings">SETTINGS</button>
+      <button data-section="about">ABOUT</button>
+    </nav>
+  </header>
+
+  <!-- main -->
+  <main id="main-content">
+
+    <!-- dashboard -->
+    <section id="dashboard" class="app-section" aria-label="Dashboard and statistics">
+
+      <p class="page-eyebrow">The Balance Page</p>
+      <h2 class="page-title">Dashboard</h2>
+      <div class="page-rule" aria-hidden="true"></div>
+
+      <!-- Banknote: total expenditure display -->
+      <article class="note-outer" aria-label="Total recorded expenditure">
+        <div class="note-inner">
+          <canvas id="note-canvas" class="note-canvas" aria-hidden="true"></canvas>
+
+          <!-- Corner leaf ornaments (decorative) -->
+          <svg class="note-corner" width="46" height="60" viewBox="0 0 60 80" style="top:14px;left:14px;transform:rotate(135deg);" aria-hidden="true"><g fill="none" stroke="#ab1509" stroke-width="1.05" stroke-linecap="round"><path d="M30 78 C 28 58, 26 38, 30 4"/><path d="M29 68 C 18 66, 10 60, 6 54"/><path d="M28 58 C 18 56, 11 51, 7 46"/><path d="M27 48 C 18 46, 12 42, 9 38"/><path d="M28 38 C 20 37, 15 33, 12 29"/><path d="M29 28 C 22 27, 18 24, 16 21"/><path d="M30 18 C 26 17, 23 15, 21 12"/><path d="M31 68 C 42 66, 50 60, 54 54"/><path d="M32 58 C 42 56, 49 51, 53 46"/><path d="M33 48 C 42 46, 48 42, 51 38"/><path d="M32 38 C 40 37, 45 33, 48 29"/><path d="M31 28 C 38 27, 42 24, 44 21"/><path d="M30 18 C 34 17, 37 15, 39 12"/></g></svg>
+          <svg class="note-corner" width="46" height="60" viewBox="0 0 60 80" style="top:14px;right:14px;transform:rotate(225deg);" aria-hidden="true"><g fill="none" stroke="#ab1509" stroke-width="1.05" stroke-linecap="round"><path d="M30 78 C 28 58, 26 38, 30 4"/><path d="M29 68 C 18 66, 10 60, 6 54"/><path d="M28 58 C 18 56, 11 51, 7 46"/><path d="M27 48 C 18 46, 12 42, 9 38"/><path d="M28 38 C 20 37, 15 33, 12 29"/><path d="M29 28 C 22 27, 18 24, 16 21"/><path d="M30 18 C 26 17, 23 15, 21 12"/><path d="M31 68 C 42 66, 50 60, 54 54"/><path d="M32 58 C 42 56, 49 51, 53 46"/><path d="M33 48 C 42 46, 48 42, 51 38"/><path d="M32 38 C 40 37, 45 33, 48 29"/><path d="M31 28 C 38 27, 42 24, 44 21"/><path d="M30 18 C 34 17, 37 15, 39 12"/></g></svg>
+          <svg class="note-corner" width="46" height="60" viewBox="0 0 60 80" style="bottom:14px;left:14px;transform:rotate(45deg);" aria-hidden="true"><g fill="none" stroke="#ab1509" stroke-width="1.05" stroke-linecap="round"><path d="M30 78 C 28 58, 26 38, 30 4"/><path d="M29 68 C 18 66, 10 60, 6 54"/><path d="M28 58 C 18 56, 11 51, 7 46"/><path d="M27 48 C 18 46, 12 42, 9 38"/><path d="M28 38 C 20 37, 15 33, 12 29"/><path d="M29 28 C 22 27, 18 24, 16 21"/><path d="M30 18 C 26 17, 23 15, 21 12"/><path d="M31 68 C 42 66, 50 60, 54 54"/><path d="M32 58 C 42 56, 49 51, 53 46"/><path d="M33 48 C 42 46, 48 42, 51 38"/><path d="M32 38 C 40 37, 45 33, 48 29"/><path d="M31 28 C 38 27, 42 24, 44 21"/><path d="M30 18 C 34 17, 37 15, 39 12"/></g></svg>
+          <svg class="note-corner" width="46" height="60" viewBox="0 0 60 80" style="bottom:14px;right:14px;transform:rotate(-45deg);" aria-hidden="true"><g fill="none" stroke="#ab1509" stroke-width="1.05" stroke-linecap="round"><path d="M30 78 C 28 58, 26 38, 30 4"/><path d="M29 68 C 18 66, 10 60, 6 54"/><path d="M28 58 C 18 56, 11 51, 7 46"/><path d="M27 48 C 18 46, 12 42, 9 38"/><path d="M28 38 C 20 37, 15 33, 12 29"/><path d="M29 28 C 22 27, 18 24, 16 21"/><path d="M30 18 C 26 17, 23 15, 21 12"/><path d="M31 68 C 42 66, 50 60, 54 54"/><path d="M32 58 C 42 56, 49 51, 53 46"/><path d="M33 48 C 42 46, 48 42, 51 38"/><path d="M32 38 C 40 37, 45 33, 48 29"/><path d="M31 28 C 38 27, 42 24, 44 21"/><path d="M30 18 C 34 17, 37 15, 39 12"/></g></svg>
+
+          <div class="note-diamond" style="top:10px;left:10px;"  aria-hidden="true"></div>
+          <div class="note-diamond" style="top:10px;right:10px;" aria-hidden="true"></div>
+          <div class="note-diamond" style="bottom:10px;left:10px;" aria-hidden="true"></div>
+          <div class="note-diamond" style="bottom:10px;right:10px;" aria-hidden="true"></div>
+
+          <div class="note-row">
+            <div class="note-tag ink">Total Recorded Expenditure</div>
+            <div class="note-tag red">All Entries &middot; USD</div>
+          </div>
+
+          <div class="note-center">
+            <div class="note-cur" aria-hidden="true">USD</div>
+            <!-- to be manipulated in  dashboard.js  -->
+            <div class="note-amount" id="stat-total-amount" aria-label="Total amount">$0.00</div>
+            <div class="note-sub">
+              <span id="stat-total-records">0</span> Entries &middot; Led by <span id="stat-top-category">N/A</span>
+            </div>
+          </div>
+
+          <div class="note-row foot">
+            <div class="note-tag red">Ser &middot; RL&ndash;0013&ndash;A</div>
+            <div class="note-tag ink">This Account &middot; Personal Reserve</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Currency conversion strip -->
+      <div class="cur-strip" aria-label="Currency conversions">
+        <span id="label-total-cur1">Total (EUR)</span>: <span id="stat-total-cur1">Set rate in Settings</span>
+        &nbsp;&middot;&nbsp;
+        <span id="label-total-cur2">Total (RWF)</span>: <span id="stat-total-cur2">Set rate in Settings</span>
+      </div>
+
+      <!-- Stat cards row -->
+      <div class="stat-row">
+        <div class="card">
+          <svg class="leaf-svg" width="44" height="58" viewBox="0 0 60 80" style="transform:rotate(20deg);" aria-hidden="true"><g fill="none" stroke="#ab1509" stroke-width="1.05" stroke-linecap="round"><path d="M30 78 C 28 58, 26 38, 30 4"/><path d="M29 68 C 18 66, 10 60, 6 54"/><path d="M28 58 C 18 56, 11 51, 7 46"/><path d="M27 48 C 18 46, 12 42, 9 38"/><path d="M28 38 C 20 37, 15 33, 12 29"/><path d="M29 28 C 22 27, 18 24, 16 21"/><path d="M30 18 C 26 17, 23 15, 21 12"/><path d="M31 68 C 42 66, 50 60, 54 54"/><path d="M32 58 C 42 56, 49 51, 53 46"/><path d="M33 48 C 42 46, 48 42, 51 38"/><path d="M32 38 C 40 37, 45 33, 48 29"/><path d="M31 28 C 38 27, 42 24, 44 21"/><path d="M30 18 C 34 17, 37 15, 39 12"/></g></svg>
+          <div class="card-head">Entries kept</div>
+          <div class="stat-value big" id="stat-total-records-mirror" aria-hidden="true">0</div>
+          <div class="card-note">Lines in the ledger</div>
+        </div>
+        <div class="card">
+          <svg class="leaf-svg" width="44" height="58" viewBox="0 0 60 80" style="transform:rotate(20deg);" aria-hidden="true"><g fill="none" stroke="#ab1509" stroke-width="1.05" stroke-linecap="round"><path d="M30 78 C 28 58, 26 38, 30 4"/><path d="M29 68 C 18 66, 10 60, 6 54"/><path d="M28 58 C 18 56, 11 51, 7 46"/><path d="M27 48 C 18 46, 12 42, 9 38"/><path d="M28 38 C 20 37, 15 33, 12 29"/><path d="M29 28 C 22 27, 18 24, 16 21"/><path d="M30 18 C 26 17, 23 15, 21 12"/><path d="M31 68 C 42 66, 50 60, 54 54"/><path d="M32 58 C 42 56, 49 51, 53 46"/><path d="M33 48 C 42 46, 48 42, 51 38"/><path d="M32 38 C 40 37, 45 33, 48 29"/><path d="M31 28 C 38 27, 42 24, 44 21"/><path d="M30 18 C 34 17, 37 15, 39 12"/></g></svg>
+          <div class="card-head">Top category</div>
+          <div class="stat-value cat" id="stat-top-category-mirror" aria-hidden="true">N/A</div>
+          <div class="card-note plain">Highest combined spend</div>
+        </div>
+      </div>
+
+      <!-- Lower row: budget + 7-day chart -->
+      <div class="lower-row">
+        <div class="crop tl" aria-hidden="true"></div>
+        <div class="crop tr" aria-hidden="true"></div>
+        <div class="crop bl" aria-hidden="true"></div>
+        <div class="crop br" aria-hidden="true"></div>
+
+        <!-- Budget card -->
+        <section class="card tall" aria-label="Monthly budget status">
+          <svg class="leaf-svg" style="top:auto;bottom:18px;right:18px;opacity:0.4;transform:rotate(-150deg);" width="46" height="60" viewBox="0 0 60 80" aria-hidden="true"><g fill="none" stroke="#ab1509" stroke-width="1.05" stroke-linecap="round"><path d="M30 78 C 28 58, 26 38, 30 4"/><path d="M29 68 C 18 66, 10 60, 6 54"/><path d="M28 58 C 18 56, 11 51, 7 46"/><path d="M27 48 C 18 46, 12 42, 9 38"/><path d="M28 38 C 20 37, 15 33, 12 29"/><path d="M29 28 C 22 27, 18 24, 16 21"/><path d="M30 18 C 26 17, 23 15, 21 12"/><path d="M31 68 C 42 66, 50 60, 54 54"/><path d="M32 58 C 42 56, 49 51, 53 46"/><path d="M33 48 C 42 46, 48 42, 51 38"/><path d="M32 38 C 40 37, 45 33, 48 29"/><path d="M31 28 C 38 27, 42 24, 44 21"/><path d="M30 18 C 34 17, 37 15, 39 12"/></g></svg>
+          <h3 class="card-head mb">Monthly budget</h3>
+          <div class="stat-value" id="stat-budget-status">No cap set</div>
+          <div class="budget-track" aria-hidden="true">
+            <div class="budget-fill" id="budget-fill" style="width:0%;"></div>
+          </div>
+        </section>
+
+        <!-- 7-day trend chart — dashboard.js injects bars into #trend-chart -->
+        <section class="card tall" aria-label="Spending over the last seven days">
+          <svg class="leaf-svg" style="top:14px;right:18px;opacity:0.42;transform:rotate(22deg);" width="44" height="58" viewBox="0 0 60 80" aria-hidden="true"><g fill="none" stroke="#ab1509" stroke-width="1.05" stroke-linecap="round"><path d="M30 78 C 28 58, 26 38, 30 4"/><path d="M29 68 C 18 66, 10 60, 6 54"/><path d="M28 58 C 18 56, 11 51, 7 46"/><path d="M27 48 C 18 46, 12 42, 9 38"/><path d="M28 38 C 20 37, 15 33, 12 29"/><path d="M29 28 C 22 27, 18 24, 16 21"/><path d="M30 18 C 26 17, 23 15, 21 12"/><path d="M31 68 C 42 66, 50 60, 54 54"/><path d="M32 58 C 42 56, 49 51, 53 46"/><path d="M33 48 C 42 46, 48 42, 51 38"/><path d="M32 38 C 40 37, 45 33, 48 29"/><path d="M31 28 C 38 27, 42 24, 44 21"/><path d="M30 18 C 34 17, 37 15, 39 12"/></g></svg>
+          <h3 class="seven-head">The last seven days</h3>
+          <p class="seven-sub" id="seven-total">loading…</p>
+          <div class="seven-plot">
+            <div id="trend-chart" role="region" aria-label="Bar chart of spending for the last 7 days"></div>
+          </div>
+        </section>
+      </div>
+
+    </section>
+
+
+    <!-- records -->
+    <section id="records" class="app-section hidden" aria-label="Transaction records">
+
+      <p class="page-eyebrow">Every Line Accounted For</p>
+      <h2 class="page-title">Transactions</h2>
+      <div class="page-rule" aria-hidden="true"></div>
+
+      <!-- Search controls -->
+      <div class="records-controls">
+        <div>
+          <label for="search-input" style="font-size:11px;letter-spacing:2.5px;font-weight:600;color:var(--muted);text-transform:uppercase;display:block;margin-bottom:6px;">
+            Search the Ledger <span style="font-style:italic;font-weight:400;letter-spacing:1px;text-transform:none;">(regular expressions welcome)</span>
+          </label>
+          <div class="search-bar-wrap">
+            <span class="search-arrow" aria-hidden="true">&#171;&#171;</span>
+            <input type="text" id="search-input"
+                   placeholder="e.g. (coffee|tea) or \d{2}\b"
+                   aria-label="Search transactions using regex">
+            <span class="search-arrow" aria-hidden="true">&#187;&#187;</span>
+          </div>
+        </div>
+
+        <div class="case-toggle-wrap" style="margin-top:22px;">
+          <label for="search-case-insensitive" style="cursor:pointer;display:inline-flex;align-items:center;gap:8px;">
+            <input type="checkbox" id="search-case-insensitive" checked>
+            CASE INSENSITIVE
+          </label>
+        </div>
+
+        <div style="margin-top:22px;">
+          <label style="font-size:11px;letter-spacing:2.5px;font-weight:600;color:var(--muted);text-transform:uppercase;display:block;margin-bottom:6px;">Sort By</label>
+          <div class="sort-controls">
+            <span class="sort-arrow" aria-hidden="true">&#171;&#171;</span>
+            <button id="sort-date" aria-label="Sort by date, newest first">Date added — newest first</button>
+            <button id="sort-description" aria-label="Sort by description A to Z">Description A-Z</button>
+            <button id="sort-amount" aria-label="Sort by amount">Amount</button>
+            <span class="sort-arrow" aria-hidden="true">&#187;&#187;</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="search-hint" id="search-count" aria-live="polite"> type to search</p>
+
+      <!-- Records table -->
+      <div id="records-container">
+        <table id="records-table">
+          <thead>
+            <tr>
+              <th scope="col">Description</th>
+              <th scope="col">Amount</th>
+              <th scope="col">Category</th>
+              <th scope="col">Date</th>
+              <th scope="col"><span class="sr-only">Actions</span></th>
+            </tr>
+          </thead>
+          <tbody id="records-body"></tbody>
+        </table>
+      </div>
+
+    </section>
+
+
+    <!-- form-section -->
+    <section id="form-section" class="app-section hidden" aria-label="Add or edit a transaction">
+
+      <p class="page-eyebrow">In Your Own Hand</p>
+      <h2 class="page-title">Add an entry</h2>
+      <div class="page-rule" aria-hidden="true"></div>
+
+      <div class="form-card">
+        <h3 id="form-title" class="sr-only">Add New Transaction</h3>
+
+        <form id="transaction-form" novalidate aria-labelledby="form-title">
+          <input type="hidden" id="form-record-id">
+
+          <!-- Description -->
+          <div class="form-field">
+            <label for="form-description">Description</label>
+            <input type="text" id="form-description"
+                   autocomplete="off" required
+                   aria-describedby="err-description"
+                   placeholder="e.g. Coffee with study group">
+            <span class="error-msg" id="err-description" aria-live="polite"></span>
+          </div>
+
+          <!-- Amount + Category (side by side on tablet) -->
+          <div class="form-row">
+            <div class="form-field">
+              <label for="form-amount">Amount</label>
+              <input type="text" id="form-amount"
+                     inputmode="decimal" required
+                     aria-describedby="err-amount"
+                     placeholder="e.g. 12.50">
+              <p class="form-hint" id="amountHelp">No currency symbol needed</p>
+              <span class="error-msg" id="err-amount" aria-live="polite"></span>
+            </div>
+            <div class="form-field">
+              <label for="form-category">Category</label>
+              <input type="text" id="form-category"
+                     list="default-categories" required
+                     aria-describedby="err-category"
+                     placeholder="Food">
+              <datalist id="default-categories">
+                <option value="Food"></option>
+                <option value="Books"></option>
+                <option value="Transport"></option>
+                <option value="Entertainment"></option>
+                <option value="Fees"></option>
+                <option value="Other"></option>
+              </datalist>
+              <p class="form-hint">Pick the closest bucket</p>
+              <span class="error-msg" id="err-category" aria-live="polite"></span>
+            </div>
+          </div>
+
+          <!-- Date -->
+          <div class="form-field">
+            <label for="form-date">Date</label>
+            <input type="date" id="form-date" required
+                   aria-describedby="err-date">
+            <p class="form-hint">YYYY-MM-DD</p>
+            <span class="error-msg" id="err-date" aria-live="polite"></span>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit">SAVE ENTRY</button>
+            <button type="button" id="form-cancel">Cancel</button>
+            <span id="form-saved-feedback" aria-live="polite"></span>
+          </div>
+        </form>
+      </div>
+
+    </section>
+
+
+    <!-- settings section -->
+    <section id="settings" class="app-section hidden" aria-label="Application settings">
+
+      <p class="page-eyebrow">In Your Own Hand</p>
+      <h2 class="page-title">Settings</h2>
+      <div class="page-rule" aria-hidden="true"></div>
+
+      <div class="settings-layout">
+
+        <!-- Spending cap card -->
+        <div class="settings-card">
+          <h3>Spending cap</h3>
+          <div class="settings-field">
+            <label for="settings-budget-cap">Monthly cap</label>
+            <input type="number" id="settings-budget-cap"
+                   step="0.01" min="0" placeholder="e.g. 500.00"
+                   aria-describedby="err-budget-cap">
+            <p class="settings-hint">Set to 0 to remove the cap</p>
+            <span class="error-msg" id="err-budget-cap" aria-live="polite"></span>
+          </div>
+          <button class="btn-primary" id="btn-save-settings">SAVE CAP</button>
+          <span id="settings-saved-msg" aria-live="polite"></span>
+        </div>
+
+        <!-- Currency rates card -->
+        <div class="settings-card">
+          <h3>Currencies</h3>
+          <p class="settings-hint">Enter how many units of each currency equal 1 USD.</p>
+
+          <div class="settings-field">
+            <label for="rate-currency-1-name">Currency 1</label>
+            <select id="rate-currency-1-name">
+              <option value="EUR">EUR - Euro</option>
+              <option value="RWF">RWF - Rwandan Franc</option>
+              <option value="USD">USD - US Dollar</option>
+            </select>
+          </div>
+          <div class="settings-row">
+            <div class="settings-field">
+              <label for="rate-currency-1">Rate (per 1 USD)</label>
+              <input type="number" id="rate-currency-1"
+                     step="0.0001" min="0" placeholder="e.g. 0.9200"
+                     aria-describedby="err-rate-1">
+              <span class="error-msg" id="err-rate-1" aria-live="polite"></span>
+            </div>
+            <div class="settings-field">
+              <label for="rate-currency-2-name">Currency 2</label>
+              <select id="rate-currency-2-name">
+                <option value="RWF">RWF - Rwandan Franc</option>
+                <option value="EUR">EUR - Euro</option>
+                <option value="USD">USD - US Dollar</option>
+              </select>
+            </div>
+          </div>
+          <div class="settings-field">
+            <label for="rate-currency-2">Rate (per 1 USD)</label>
+            <input type="number" id="rate-currency-2"
+                   step="0.0001" min="0" placeholder="e.g. 1300"
+                   aria-describedby="err-rate-2">
+            <span class="error-msg" id="err-rate-2" aria-live="polite"></span>
+          </div>
+          <button class="btn-primary" id="btn-save-currency">SAVE SETTINGS</button>
+        </div>
+
+        <!-- Data portability -->
+        <div class="settings-card" style="grid-column: 1 / -1;">
+          <h3>Your data</h3>
+          <p class="data-description">
+            Everything auto-saves to browser localStorage. Export a copy as JSON to back up your
+            data, or import a previously exported file to restore it.
+          </p>
+          <div class="import-row">
+            <button class="btn-primary" id="btn-export">EXPORT JSON</button>
+            <label for="input-import" class="btn-outline">IMPORT JSON</label>
+            <input type="file" id="input-import" accept=".json"
+                   style="position:absolute;width:1px;height:1px;opacity:0;overflow:hidden;"
+                   aria-label="Import JSON data file">
+          </div>
+        </div>
+
+        <!-- Sample data + reset -->
+        <div class="settings-card" style="grid-column: 1 / -1;">
+          <h3>Quick actions</h3>
+          <p class="data-description">
+            Load a set of example transactions to explore the app, or wipe everything back to a clean slate.
+          </p>
+          <div class="import-row">
+            <button class="btn-primary" id="btn-sample-data">LOAD SAMPLE DATA</button>
+            <button class="btn-outline btn-danger" id="btn-reset">RESET TO DEFAULTS</button>
+          </div>
+          <span id="quick-action-msg" aria-live="polite"></span>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- about -->
+    <section id="about" class="app-section hidden" aria-label="About this application">
+
+      <p class="page-eyebrow">The Story</p>
+      <h2 class="page-title">About</h2>
+      <div class="page-rule" aria-hidden="true"></div>
+
+      <div class="about-body">
+        <p>
+          FINLAC is a local-first budgeting tool built for  students
+          who need a simple, private way to stay on top of their spending. It runs entirely in
+          the browser &mdash; no accounts, no servers, no data leaving your device.
+        </p>
+        <p>
+          Students can log transactions across categories like Food, Books, and Transport,
+          set a monthly spending cap, and instantly search or sort their records. The dashboard
+          surfaces totals, top spending categories, and a 7-day trend so you can see where
+          your money is going at a glance. Data can be exported and imported as JSON for
+          backup or transfer between devices.
+        </p>
+
+        <h3>Features</h3>
+        <ul>
+          <li>Local-first &mdash; all data stays in your browser</li>
+          <li>Live regex search across all fields</li>
+          <li>Sort by date, description, or amount</li>
+          <li>Monthly budget cap with visual progress bar</li>
+          <li>Manual currency conversion (two configurable currencies)</li>
+          <li>7-day spending trend chart</li>
+          <li>JSON export / import for backup and migration</li>
+          <li>Accessible: keyboard navigation, ARIA live regions, skip link</li>
+        </ul>
+
+        <h3>Contact Developer</h3>
+        <ul>
+          <li>Email: <a href="mailto:b.lewis@alustudent.com" id="dev-email">b.lewis@alustudent.com</a></li>
+          <li>GitHub: <a href="https://github.com/blewis-bump" target="blank" rel="github account">github.com/blewis-bump</a></li>
+        </ul>
+
+        <h3>Developer Tools</h3>
+        <a href="tests.html" target="_blank" rel="noopener" class="btn-outline" style="text-decoration:none;font-weight:600;">RUN TEST PAGE</a>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- footer -->
+  <footer>
+  <!-- moving nav bar to the bottom for mobile responsiveness. -->
+    <nav class="bottom-nav" aria-label="Mobile navigation">
+      <button data-section="dashboard">DASHBOARD</button>
+      <button data-section="records">TRANSACTIONS</button>
+      <button data-section="form-section">ADD ENTRY</button>
+      <button data-section="settings">SETTINGS</button>
+      <button data-section="about">ABOUT</button>
+    </nav>
+    <p class="footer-copy">&copy; 2026 FINLAC &mdash; Lewis's Project</p>
+  </footer>
+
+
+  <!-- application scripts -->
+  <script type="module" src="scripts/main.js"></script>
+  <script type="module" src="scripts/dashboard.js"></script>
+  <script type="module" src="scripts/settings.js"></script>
+  <script type="module" src="scripts/transactions.js"></script>
+
+</body>
+</html>
