@@ -69,8 +69,12 @@
 
 ## How to Run Tests
 
-**Manual tests:** See [`tutorial.md`](tutorial.md) — step-by-step tests per page, each mapped to an assignment requirement.
-
 **Automated regex tests:** Open [`tests.html`](tests.html) in the browser. Runs assertions against all regex patterns and reports pass/fail for each case.
 
 **Seed data:** Import [`seed.json`](seed.json) from the Settings page to load 15 sample transactions across all categories.
+---
+## References
+
+- UI inspiration: TemplateMo – Ledger Slideshow Template
+  https://templatemo.com/tm-626-ledger-slideshow
+- All application logic and implementation were created independently.
