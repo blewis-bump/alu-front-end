@@ -4,6 +4,7 @@
 
 **Live demo:** https://blewis-bump.github.io/alu-front-end/#dashboard
 **demo video:** https://youtu.be/TgmX2cXt5c8
+**Wire-frame:** https://canva.link/yju1u1jc5f2nss8
 
 ## How to Run
 
